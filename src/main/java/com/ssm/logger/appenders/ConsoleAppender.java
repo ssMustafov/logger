@@ -13,8 +13,8 @@ public class ConsoleAppender extends BaseAppender {
     }
 
     @Override
-    protected void doAppend(LoggerContext context, String formatted) {
-        System.out.println(formatted);
+    protected void doAppend(LoggerContext context, String formattedMessage) {
+        System.out.println(formattedMessage);
     }
 
 }

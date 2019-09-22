@@ -24,15 +24,22 @@ public class FileAppender extends BaseAppender {
     }
 
     @Override
-    protected void doAppend(LoggerContext context, String formatted) {
-        formatted = String.format("%s%n", formatted);
+    protected void doAppend(LoggerContext context, String formattedMessage) {
+        formattedMessage = addNewLine(formattedMessage);
+        appendToFile(formattedMessage);
+    }
 
+    private void appendToFile(String formattedMessage) {
         try {
             Path path = Paths.get(file.getAbsolutePath());
-            Files.write(path, formatted.getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
+            Files.write(path, formattedMessage.getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static String addNewLine(String formattedMessage) {
+        return String.format("%s%n", formattedMessage);
     }
 
 }

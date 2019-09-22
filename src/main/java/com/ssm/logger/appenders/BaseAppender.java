@@ -16,9 +16,9 @@ public abstract class BaseAppender implements Appender {
 
     @Override
     public void append(LoggerContext context) {
-        String formatted = formatter.format(context);
-        doAppend(context, formatted);
+        String formattedMessage = formatter.format(context);
+        doAppend(context, formattedMessage);
     }
 
-    protected abstract void doAppend(LoggerContext context, String formatted);
+    protected abstract void doAppend(LoggerContext context, String formattedMessage);
 }
