@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * Formatter which uses specific pattern. It has the following mandatory placeholders:
  * <pre>
- *     - {date:_format_} - placeholder for the date, where _format_ is the formatting pattern used by {@link SimpleDateFormat}
+ *     - {date:format} - placeholder for the date, where 'format' is the formatting pattern used by {@link SimpleDateFormat}
  *     - {level} - placeholder for the log level
  *     - {message} - placeholder for the log message
  * </pre>
