@@ -15,7 +15,7 @@ public class SimpleFormatter implements Formatter {
     @Override
     public String format(Date date, LogLevel logLevel, String message) {
         String formattedDate = DATE_FORMAT.format(date);
-        return String.format("%1$-24s %2$-6s %3$s", formattedDate, logLevel, message);
+        return String.format("%s  %s  %s", formattedDate, logLevel, message);
     }
 
 }

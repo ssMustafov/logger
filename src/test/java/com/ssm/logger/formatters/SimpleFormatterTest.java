@@ -20,7 +20,7 @@ public class SimpleFormatterTest {
         Formatter formatter = new SimpleFormatter();
         String formatted = formatter.format(date, LogLevel.INFO, "Sample message");
 
-        assertEquals("2019-09-22 14:30:46,453 INFO  Sample message", formatted);
+        assertEquals("2019-09-22 14:30:46,453  INFO  Sample message", formatted);
     }
 
     @Test
@@ -30,7 +30,7 @@ public class SimpleFormatterTest {
         Formatter formatter = new SimpleFormatter();
         String formatted = formatter.format(date, LogLevel.ERROR, "Connection failed");
 
-        assertEquals("2019-09-22 14:30:46,453 ERROR  Connection failed", formatted);
+        assertEquals("2019-09-22 14:30:46,453  ERROR  Connection failed", formatted);
     }
 
     private Date buildDate() {
