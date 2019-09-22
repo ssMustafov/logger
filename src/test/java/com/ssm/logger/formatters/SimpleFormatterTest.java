@@ -1,6 +1,7 @@
 package com.ssm.logger.formatters;
 
 import com.ssm.logger.LogLevel;
+import com.ssm.logger.context.LoggerContext;
 import org.junit.Test;
 
 import java.util.Calendar;
@@ -18,7 +19,7 @@ public class SimpleFormatterTest {
         Date date = buildDate();
 
         Formatter formatter = new SimpleFormatter();
-        String formatted = formatter.format(date, LogLevel.INFO, "Sample message");
+        String formatted = formatter.format(LoggerContext.build(date, LogLevel.INFO, "Sample message"));
 
         assertEquals("2019-09-22 14:30:46,453  INFO  Sample message", formatted);
     }
@@ -28,7 +29,7 @@ public class SimpleFormatterTest {
         Date date = buildDate();
 
         Formatter formatter = new SimpleFormatter();
-        String formatted = formatter.format(date, LogLevel.ERROR, "Connection failed");
+        String formatted = formatter.format(LoggerContext.build(date, LogLevel.ERROR, "Connection failed"));
 
         assertEquals("2019-09-22 14:30:46,453  ERROR  Connection failed", formatted);
     }

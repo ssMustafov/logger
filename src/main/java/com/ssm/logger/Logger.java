@@ -1,6 +1,7 @@
 package com.ssm.logger;
 
 import com.ssm.logger.appenders.Appender;
+import com.ssm.logger.context.LoggerContext;
 
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class Logger {
     }
 
     private void log(LogLevel logLevel, String message) {
-        appenders.forEach(appender -> appender.append(logLevel, message));
+        appenders.forEach(appender -> appender.append(LoggerContext.build(logLevel, message)));
     }
 
 }

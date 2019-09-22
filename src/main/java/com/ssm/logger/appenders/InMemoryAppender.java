@@ -1,6 +1,7 @@
 package com.ssm.logger.appenders;
 
 import com.ssm.logger.LogLevel;
+import com.ssm.logger.context.LoggerContext;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +20,7 @@ public class InMemoryAppender implements Appender {
     }
 
     @Override
-    public void append(LogLevel logLevel, String message) {
-        messageMap.put(message, logLevel);
+    public void append(LoggerContext context) {
+        messageMap.put(context.getMessage(), context.getLogLevel());
     }
 }

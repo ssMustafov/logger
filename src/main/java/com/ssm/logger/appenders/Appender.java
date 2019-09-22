@@ -1,6 +1,6 @@
 package com.ssm.logger.appenders;
 
-import com.ssm.logger.LogLevel;
+import com.ssm.logger.context.LoggerContext;
 
 /**
  * Provides facility to append messages to a location. The location could be console, file, database, etc.
@@ -9,6 +9,6 @@ import com.ssm.logger.LogLevel;
  */
 public interface Appender {
 
-    void append(LogLevel logLevel, String message);
+    void append(LoggerContext context);
 
 }
