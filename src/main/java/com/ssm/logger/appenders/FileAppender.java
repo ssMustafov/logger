@@ -1,5 +1,6 @@
 package com.ssm.logger.appenders;
 
+import com.ssm.logger.LogLevel;
 import com.ssm.logger.context.LoggerContext;
 import com.ssm.logger.formatters.Formatter;
 
@@ -20,6 +21,11 @@ public class FileAppender extends BaseAppender {
 
     public FileAppender(Formatter formatter, File file) {
         super(formatter);
+        this.file = file;
+    }
+
+    public FileAppender(Formatter formatter, File file, LogLevel logLevel) {
+        super(formatter, logLevel);
         this.file = file;
     }
 

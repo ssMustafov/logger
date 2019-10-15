@@ -45,13 +45,36 @@ public class FileAppenderTest {
         appender.append(LoggerContext.build(date, LogLevel.TRACE, "Connection acquired successfully"));
         appender.append(LoggerContext.build(date, LogLevel.ERROR, "Failed to contact database"));
 
-        Path path = Paths.get(logFile.getAbsolutePath());
-        List<String> lines = Files.readAllLines(path);
+        List<String> lines = readFileLines();
         assertFalse("The log file should not be empty", lines.isEmpty());
         assertEquals("The log file should contain 3 lines", 3, lines.size());
         assertEquals("2019-09-22 14:30:46,453  INFO  Application started!", lines.get(0));
         assertEquals("2019-09-22 14:30:46,453  TRACE  Connection acquired successfully", lines.get(1));
         assertEquals("2019-09-22 14:30:46,453  ERROR  Failed to contact database", lines.get(2));
+    }
+
+    @Test
+    public void shouldLogThresholdLevel() throws IOException {
+        Date date = buildDate();
+
+        Appender appender = new FileAppender(new SimpleFormatter(), logFile, LogLevel.ERROR);
+        appender.append(LoggerContext.build(date, LogLevel.INFO, "Info message"));
+        appender.append(LoggerContext.build(date, LogLevel.ERROR, "Error message"));
+        appender.append(LoggerContext.build(date, LogLevel.TRACE, "Trace message"));
+        appender.append(LoggerContext.build(date, LogLevel.DEBUG, "Debug message"));
+        appender.append(LoggerContext.build(date, LogLevel.WARN, "Warn message"));
+        appender.append(LoggerContext.build(date, LogLevel.FATAL, "Fatal message"));
+
+        List<String> lines = readFileLines();
+        assertFalse("The log file should not be empty", lines.isEmpty());
+        assertEquals("The log file should contain 2 lines", 2, lines.size());
+        assertEquals("2019-09-22 14:30:46,453  ERROR  Error message", lines.get(0));
+        assertEquals("2019-09-22 14:30:46,453  FATAL  Fatal message", lines.get(1));
+    }
+
+    private List<String> readFileLines() throws IOException {
+        Path path = Paths.get(logFile.getAbsolutePath());
+        return Files.readAllLines(path);
     }
 
     private Date buildDate() {
